@@ -30,12 +30,24 @@ public class AccessTokenValidator {
     private final PropertiesCache cache;
     private final KeyManager keyManager;
 
+    /**
+     * Constructor for AccessTokenValidator.
+     * @param keyManager the KeyManager instance for managing public keys
+     * @param mapper the ObjectMapper for JSON processing
+     * @param cache the PropertiesCache for configuration properties
+     */
     public AccessTokenValidator(KeyManager keyManager, ObjectMapper mapper, PropertiesCache cache) {
         this.keyManager = keyManager;
         this.mapper = mapper;
         this.cache = cache;
     }
 
+    /**
+     * Validates the given access token.
+     * @param token the access token to be validated
+     * @return a map containing the token payload if valid; otherwise, an empty map
+     * @throws Exception if validation fails
+     */
     private Map<String, Object> validateToken(String token) throws Exception {
         try {
             String[] tokenElements = token.split("\\.");
@@ -67,9 +79,14 @@ public class AccessTokenValidator {
         } catch (Exception e) {
             log.warn("Failed to validate the user token. Exception: ", e);
         }
-        return Collections.EMPTY_MAP;
+        return Collections.emptyMap();
     }
 
+    /**
+     * Verifies the user token and extracts the user ID if valid.
+     * @param token the access token to be verified
+     * @return the user ID if the token is valid; otherwise, "UNAUTHORIZED"
+     */
     public String verifyUserToken(String token) {
         String userId = CommonConstants._UNAUTHORIZED;
         try {
@@ -87,6 +104,11 @@ public class AccessTokenValidator {
         return userId;
     }
 
+    /**
+     * Checks if the issuer (iss) of the token matches the expected realm URL.
+     * @param iss the issuer from the token
+     * @return true if the issuer matches the expected realm URL, false otherwise
+     */
     private boolean checkIss(String iss) {
         String realmUrl = cache.getProperty(CommonConstants.SSO_URL) + "realms/"
                 + cache.getProperty(CommonConstants.SSO_REALM);
@@ -95,6 +117,11 @@ public class AccessTokenValidator {
         return (realmUrl.equalsIgnoreCase(iss));
     }
 
+    /**
+     * Checks if the token is expired based on the expiration time.
+     * @param expiration the expiration time in seconds since epoch
+     * @return true if the token is expired, false otherwise
+     */
     private boolean isExpired(Integer expiration) {
         long currentTime = Instant.now().getEpochSecond();
         boolean retValue = (currentTime > expiration);
@@ -105,10 +132,20 @@ public class AccessTokenValidator {
         return retValue;
     }
 
+    /**
+     * Decodes the given Base64 encoded string.
+     * @param data the Base64 encoded string to decode
+     * @return the decoded byte array
+     */
     private byte[] decodeFromBase64(String data) {
         return Base64Util.decode(data, 11);
     }
 
+    /**
+     * Fetches the user ID from the provided access token.
+     * @param accessToken the access token from which to extract the user ID
+     * @return  the extracted user ID, or null if extraction fails
+     */
     public String fetchUserIdFromAccessToken(String accessToken) {
         String clientAccessTokenId = null;
         if (accessToken != null) {
@@ -127,6 +164,12 @@ public class AccessTokenValidator {
         return clientAccessTokenId;
     }
 
+    /**
+     * Fetches the user ID from the provided access token and updates the response object in case of errors.
+     * @param accessToken the access token from which to extract the user ID
+     * @param response the ApiResponse object to update in case of errors
+     * @return the extracted user ID, or null if extraction fails
+     */
     public String fetchUserIdFromAccessToken(String accessToken, ApiResponse response) {
         String clientAccessTokenId = null;
         if (accessToken != null) {
@@ -134,7 +177,7 @@ public class AccessTokenValidator {
                 clientAccessTokenId = verifyUserToken(accessToken);
                 if (CommonConstants._UNAUTHORIZED.equalsIgnoreCase(clientAccessTokenId)) {
                     response.getParams().setStatus(CommonConstants.FAILED);
-                    response.getParams().setErrmsg(CommonConstants.ACCESS_TOKEN_IS_EXPIRED);
+                    response.getParams().setErrMsg(CommonConstants.ACCESS_TOKEN_IS_EXPIRED);
                     response.setResponseCode(HttpStatus.UNAUTHORIZED);
                     clientAccessTokenId = null;
                 }
@@ -143,7 +186,7 @@ public class AccessTokenValidator {
                         + ex.getMessage();
                 log.error(errMsg, ex);
                 response.getParams().setStatus(CommonConstants.FAILED);
-                response.getParams().setErrmsg(CommonConstants.ACCESS_TOKEN_VALIDATION_FAILED);
+                response.getParams().setErrMsg(CommonConstants.ACCESS_TOKEN_VALIDATION_FAILED);
                 response.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR);
                 clientAccessTokenId = null;
             }
@@ -151,6 +194,11 @@ public class AccessTokenValidator {
         return clientAccessTokenId;
     }
 
+    /**
+     * Extracts the payload from the given access token after validation.
+     * @param token the access token to be validated and parsed
+     * @return a map containing the token payload if valid; otherwise, an empty map
+     */
     public Map<String, Object> extractTokenPayload(String token) {
         Map<String, Object> tokenPayload = new HashMap<>();
         try {

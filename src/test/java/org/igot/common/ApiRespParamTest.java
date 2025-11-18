@@ -12,11 +12,11 @@ class ApiRespParamTest {
     void constructor_Default_CreatesEmptyObject() {
         ApiRespParam param = new ApiRespParam();
 
-        assertNull(param.getResmsgid());
-        assertNull(param.getMsgid());
+        assertNull(param.getResMsgId());
+        assertNull(param.getMsgId());
         assertNull(param.getErr());
         assertNull(param.getStatus());
-        assertNull(param.getErrmsg());
+        assertNull(param.getErrMsg());
     }
 
     @Test
@@ -25,29 +25,29 @@ class ApiRespParamTest {
         String id = "test-message-id";
         ApiRespParam param = new ApiRespParam(id);
 
-        assertEquals(id, param.getResmsgid());
-        assertEquals(id, param.getMsgid());
+        assertEquals(id, param.getResMsgId());
+        assertEquals(id, param.getMsgId());
         assertNull(param.getErr());
         assertNull(param.getStatus());
-        assertNull(param.getErrmsg());
+        assertNull(param.getErrMsg());
     }
 
     @Test
     @DisplayName("Should set and get resmsgid")
     void setResmsgid_SetsCorrectly() {
         ApiRespParam param = new ApiRespParam();
-        param.setResmsgid("response-msg-id");
+        param.setResMsgId("response-msg-id");
 
-        assertEquals("response-msg-id", param.getResmsgid());
+        assertEquals("response-msg-id", param.getResMsgId());
     }
 
     @Test
     @DisplayName("Should set and get msgid")
     void setMsgid_SetsCorrectly() {
         ApiRespParam param = new ApiRespParam();
-        param.setMsgid("message-id");
+        param.setMsgId("message-id");
 
-        assertEquals("message-id", param.getMsgid());
+        assertEquals("message-id", param.getMsgId());
     }
 
     @Test
@@ -72,9 +72,9 @@ class ApiRespParamTest {
     @DisplayName("Should set and get errmsg")
     void setErrmsg_SetsCorrectly() {
         ApiRespParam param = new ApiRespParam();
-        param.setErrmsg("Error message description");
+        param.setErrMsg("Error message description");
 
-        assertEquals("Error message description", param.getErrmsg());
+        assertEquals("Error message description", param.getErrMsg());
     }
 
     @Test
@@ -92,47 +92,47 @@ class ApiRespParamTest {
         ApiRespParam param = new ApiRespParam("test-id");
         param.setStatus("FAILED");
         param.setErr("AUTH_ERROR");
-        param.setErrmsg("Authentication failed");
+        param.setErrMsg("Authentication failed");
 
         assertEquals("FAILED", param.getStatus());
         assertEquals("AUTH_ERROR", param.getErr());
-        assertEquals("Authentication failed", param.getErrmsg());
-        assertEquals("test-id", param.getResmsgid());
-        assertEquals("test-id", param.getMsgid());
+        assertEquals("Authentication failed", param.getErrMsg());
+        assertEquals("test-id", param.getResMsgId());
+        assertEquals("test-id", param.getMsgId());
     }
 
     @Test
     @DisplayName("Should handle empty strings")
     void setFields_EmptyStrings_SetsCorrectly() {
         ApiRespParam param = new ApiRespParam();
-        param.setResmsgid("");
-        param.setMsgid("");
+        param.setResMsgId("");
+        param.setMsgId("");
         param.setErr("");
         param.setStatus("");
-        param.setErrmsg("");
+        param.setErrMsg("");
 
-        assertEquals("", param.getResmsgid());
-        assertEquals("", param.getMsgid());
+        assertEquals("", param.getResMsgId());
+        assertEquals("", param.getMsgId());
         assertEquals("", param.getErr());
         assertEquals("", param.getStatus());
-        assertEquals("", param.getErrmsg());
+        assertEquals("", param.getErrMsg());
     }
 
     @Test
     @DisplayName("Should handle null values")
     void setFields_NullValues_SetsCorrectly() {
         ApiRespParam param = new ApiRespParam("initial-id");
-        param.setResmsgid(null);
-        param.setMsgid(null);
+        param.setResMsgId(null);
+        param.setMsgId(null);
         param.setErr(null);
         param.setStatus(null);
-        param.setErrmsg(null);
+        param.setErrMsg(null);
 
-        assertNull(param.getResmsgid());
-        assertNull(param.getMsgid());
+        assertNull(param.getResMsgId());
+        assertNull(param.getMsgId());
         assertNull(param.getErr());
         assertNull(param.getStatus());
-        assertNull(param.getErrmsg());
+        assertNull(param.getErrMsg());
     }
 
     @Test
@@ -141,10 +141,10 @@ class ApiRespParamTest {
         ApiRespParam param = new ApiRespParam();
         String longString = "A".repeat(1000);
 
-        param.setErrmsg(longString);
+        param.setErrMsg(longString);
 
-        assertEquals(longString, param.getErrmsg());
-        assertEquals(1000, param.getErrmsg().length());
+        assertEquals(longString, param.getErrMsg());
+        assertEquals(1000, param.getErrMsg().length());
     }
 
     @Test
@@ -153,9 +153,9 @@ class ApiRespParamTest {
         ApiRespParam param = new ApiRespParam();
         String specialChars = "Error: !@#$%^&*()_+-=[]{}|;':\",./<>?";
 
-        param.setErrmsg(specialChars);
+        param.setErrMsg(specialChars);
 
-        assertEquals(specialChars, param.getErrmsg());
+        assertEquals(specialChars, param.getErrMsg());
     }
 
     @Test
@@ -164,8 +164,8 @@ class ApiRespParamTest {
         ApiRespParam param = new ApiRespParam();
         String unicode = "错误信息 🚨 خطأ";
 
-        param.setErrmsg(unicode);
+        param.setErrMsg(unicode);
 
-        assertEquals(unicode, param.getErrmsg());
+        assertEquals(unicode, param.getErrMsg());
     }
 }

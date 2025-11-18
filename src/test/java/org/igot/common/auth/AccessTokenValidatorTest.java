@@ -167,7 +167,7 @@ class AccessTokenValidatorTest {
 
         assertNull(result);
         assertEquals(CommonConstants.FAILED, response.getParams().getStatus());
-        assertEquals(CommonConstants.ACCESS_TOKEN_IS_EXPIRED, response.getParams().getErrmsg());
+        assertEquals(CommonConstants.ACCESS_TOKEN_IS_EXPIRED, response.getParams().getErrMsg());
         assertEquals(HttpStatus.UNAUTHORIZED, response.getResponseCode());
     }
 
