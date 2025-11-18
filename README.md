@@ -8,7 +8,7 @@ This library provides reusable utility classes and components that can be integr
 
 ## Project Information
 
-- **Group ID**: org.igot
+- **Group ID**: com.github.karthik-tarento
 - **Artifact ID**: common-util
 - **Version**: 1.0.0-SNAPSHOT
 - **Spring Boot Version**: 3.2.0
@@ -43,11 +43,38 @@ Add this dependency to your Spring Boot project's `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>org.igot</groupId>
+    <groupId>com.github.karthik-tarento</groupId>
     <artifactId>common-util</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
+
+You'll also need to add the GitHub Packages repository to your `pom.xml`:
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/karthik-tarento/common-util</url>
+    </repository>
+</repositories>
+```
+
+And configure authentication in your `~/.m2/settings.xml`:
+
+```xml
+<settings>
+    <servers>
+        <server>
+            <id>github</id>
+            <username>YOUR_GITHUB_USERNAME</username>
+            <password>YOUR_GITHUB_TOKEN</password>
+        </server>
+    </servers>
+</settings>
+```
+
+Note: You'll need a GitHub Personal Access Token with `read:packages` scope.
 
 ## Publishing
 
