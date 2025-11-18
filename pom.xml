@@ -19,7 +19,7 @@
 
     <name>Common Utilities</name>
     <description>Common utility library for Spring Boot applications</description>
-    <url>https://github.com/igot-gov/common-util</url>
+    <url>https://github.com/karthik-tarento/common-util</url>
 
     <licenses>
         <license>
@@ -37,9 +37,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/igot-gov/common-util.git</connection>
-        <developerConnection>scm:git:ssh://github.com:igot-gov/common-util.git</developerConnection>
-        <url>https://github.com/igot-gov/common-util/tree/main</url>
+        <connection>scm:git:git://github.com/karthik-tarento/common-util.git</connection>
+        <developerConnection>scm:git:ssh://github.com:karthik-tarento/common-util.git</developerConnection>
+        <url>https://github.com/karthik-tarento/common-util/tree/main</url>
     </scm>
 
     <properties>
@@ -47,6 +47,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.34</lombok.version>
     </properties>
 
     <dependencies>
@@ -67,6 +68,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
 
@@ -157,7 +159,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/igot-gov/common-util</url>
+            <url>https://maven.pkg.github.com/karthik-tarento/common-util</url>
         </repository>
     </distributionManagement>
 
