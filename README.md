@@ -8,9 +8,9 @@ This library provides reusable utility classes and components that can be integr
 
 ## Project Information
 
-- **Group ID**: com.github.karthik-tarento
+- **Group ID**: io.github.karthik-tarento
 - **Artifact ID**: common-util
-- **Version**: 1.0.0-SNAPSHOT
+- **Version**: 1.0.0
 - **Spring Boot Version**: 3.2.0
 - **Java Version**: 17
 
@@ -43,64 +43,17 @@ Add this dependency to your Spring Boot project's `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>com.github.karthik-tarento</groupId>
+    <groupId>io.github.karthik-tarento</groupId>
     <artifactId>common-util</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
-You'll also need to add the GitHub Packages repository to your `pom.xml`:
+The library is available on Maven Central, so no additional repository configuration is needed.
 
-```xml
-<repositories>
-    <repository>
-        <id>github</id>
-        <url>https://maven.pkg.github.com/karthik-tarento/common-util</url>
-    </repository>
-</repositories>
-```
+## Publishing to Maven Central
 
-And configure authentication in your `~/.m2/settings.xml`:
-
-```xml
-<settings>
-    <servers>
-        <server>
-            <id>github</id>
-            <username>YOUR_GITHUB_USERNAME</username>
-            <password>YOUR_GITHUB_TOKEN</password>
-        </server>
-    </servers>
-</settings>
-```
-
-Note: You'll need a GitHub Personal Access Token with `read:packages` scope.
-
-## Publishing
-
-This library is designed to be published to GitHub Packages or Maven Central for public use.
-
-### Publishing to GitHub Packages
-
-1. Configure your GitHub token in `~/.m2/settings.xml`:
-
-```xml
-<settings>
-    <servers>
-        <server>
-            <id>github</id>
-            <username>YOUR_GITHUB_USERNAME</username>
-            <password>YOUR_GITHUB_TOKEN</password>
-        </server>
-    </servers>
-</settings>
-```
-
-2. Deploy the library:
-
-```bash
-mvn deploy
-```
+This library is published to Maven Central for public use. See [PUBLISHING.md](PUBLISHING.md) for detailed instructions on how to publish new versions.
 
 ## Contributing
 

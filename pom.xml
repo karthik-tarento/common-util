@@ -12,9 +12,9 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.github.karthik-tarento</groupId>
+    <groupId>io.github.karthik-tarento</groupId>
     <artifactId>common-util</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>Common Utilities</name>
@@ -31,8 +31,10 @@
 
     <developers>
         <developer>
-            <organization>iGOT</organization>
-            <organizationUrl>https://igot.gov.in</organizationUrl>
+            <id>karthik-tarento</id>
+            <name>Karthik</name>
+            <email>karthikeyan.rajendran@tarento.com</email>
+            <organization>Tarento</organization>
         </developer>
     </developers>
 
@@ -97,6 +99,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Cassandra Driver Dependencies -->
+        <dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-core</artifactId>
+			<version>4.15.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-query-builder</artifactId>
+			<version>4.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -151,16 +165,36 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
             </plugin>
+
+            <!-- GPG Plugin - for signing artifacts (required by Maven Central) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Central Publishing Maven Plugin -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>false</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <!-- Distribution Management for publishing to Maven Central or GitHub Packages -->
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/karthik-tarento/common-util</url>
-        </repository>
-    </distributionManagement>
 
 </project>
